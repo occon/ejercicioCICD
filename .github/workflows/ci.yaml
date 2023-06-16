@@ -92,7 +92,10 @@ jobs:
                 DATABASE_URL: "postgres://${{ secrets.PSQL_USER }}:${{ secrets.PSQL_PWD }}@localhost:5432/${{ secrets.PSQL_DB }}"
                 SESSION_SECRET: "${{ secrets.SESSION_SECRET }}"
             with:
+                timeout: 60s
+                command_timeout: 30m
                 envs: DATABASE_URL,SESSION_SECRET
+                script_stop: true
                 script: |
                     echo DATABASE_URL="$DATABASE_URL" >> .env
                     echo SESSION_SECRET="$SESSION_SECRET" >> .env
